@@ -8,8 +8,8 @@ import (
 // Can be used on its own, and a "chaining API" DSL, to build data messages directly.
 type IMapBuffer interface {
 	GetBytes() []byte
-	AddFinalizer(func()) // added func will be called by Finalize(), just before closing the object
-	Finalize()           // the finalizer
+	AddFinalizer(func(m IMapBuffer)) // added func will be called by Finalize(), just before closing the object
+	Finalize()                       // the finalizer
 	//
 	List(k string, list IListBuffer) IMapBuffer // calls Finalize() on nested object automatically
 	Map(m IMapBuffer) IMapBuffer                // calls Finalize() on nested object automatically
