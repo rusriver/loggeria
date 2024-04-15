@@ -6,23 +6,23 @@ import (
 
 type ILogger interface {
 	// Event initializers
-	DBG(func(e E)) IEvent
-	DIS(func(e E)) IEvent
-	IfErr(err error, f func(e E)) IEvent // automatically fizzles (does nothing), if err == nil
-	ERR(func(e E)) IEvent
-	FTL(func(e E)) IEvent
-	INF(func(e E)) IEvent
-	PNC(func(e E)) IEvent
-	TRC(func(e E)) IEvent
-	WRN(func(e E)) IEvent
-	LEVEL(Level, func(e E)) IEvent
+	DBG(func(e E)) ISendable
+	DIS(func(e E)) ISendable
+	IfErr(err error, f func(e E)) ISendable // automatically fizzles (does nothing), if err == nil
+	ERR(func(e E)) ISendable
+	FTL(func(e E)) ISendable
+	INF(func(e E)) ISendable
+	PNC(func(e E)) ISendable
+	TRC(func(e E)) ISendable
+	WRN(func(e E)) ISendable
+	LEVEL(Level, func(e E)) ISendable
 
 	// Sub-system initializer; to be used right before event initializer
 	Sub(s string) ILogger
 
-	// construct nested data
+	// use these to construct nested data, it will inherit some important pieces of data from the logger
 	NewMap() IMapBuffer
-	// NewList() IListBuffer
+	NewList() IListBuffer
 
 	// Logger management
 	// All functions returning ILogger, do this for convenience only, the actual effect must be
@@ -40,9 +40,9 @@ type ILogger interface {
 	Write(p []byte) (n int, err error) // Write implements the io.Writer interface. This is useful to set as a writer for the standard library log.
 }
 
-// shorter alias
+// shorter alias; "E" stands for "event"
 type E IMapBuffer
 
-type IEvent interface {
+type ISendable interface {
 	Send()
 }
