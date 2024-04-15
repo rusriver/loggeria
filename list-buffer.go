@@ -15,8 +15,8 @@ type IListBuffer interface {
 	Map(m IMapBuffer) IListBuffer      // calls Finalize() on nested object automatically
 	//
 	StrFunc(f func() string) IListBuffer
-	RawCBOR(v []byte) IMapBuffer
-	RawJSON(v []byte) IMapBuffer
+	RawCBOR(v []byte) IListBuffer
+	RawJSON(v []byte) IListBuffer
 	//
 	// 18 common types
 	Bool(b bool) IListBuffer
@@ -30,7 +30,7 @@ type IListBuffer interface {
 	Int64(i int64) IListBuffer
 	Int8(i int8) IListBuffer
 	Str(v string) IListBuffer
-	Stringer(v fmt.Stringer) IMapBuffer
+	Stringer(v fmt.Stringer) IListBuffer
 	Time(t time.Time) IListBuffer
 	Uint(i uint) IListBuffer
 	Uint16(i uint16) IListBuffer
