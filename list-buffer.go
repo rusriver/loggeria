@@ -8,8 +8,8 @@ import (
 // Heterogeneous list
 type IListBuffer interface {
 	GetBytes() []byte
-	AddFinalizer(func(l IListBuffer)) // added func will be called by Finalize(), just before closing the object
-	Finalize()                        // the finalizer; Finalize() must be called explicitly, to "close" the object. It must be idempotent.
+	AddFinalizer(func(l IListBuffer)) IListBuffer // added func will be called by Finalize(), just before closing the object
+	Finalize() IListBuffer                        // the finalizer; Finalize() must be called explicitly, to "close" the object. It must be idempotent.
 	//
 	List(list IListBuffer) IListBuffer // calls Finalize() on nested object automatically
 	Map(m IMapBuffer) IListBuffer      // calls Finalize() on nested object automatically
