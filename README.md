@@ -23,7 +23,7 @@ The benefits of this approach, compared to zerolog:
 1) Simpler and not duplicated data model
 2) Buffers can be used on its own, outside of logger
 3) Simpler and more explicit to understand
-4) Add to p.3, only one explicit finalizer Send(), no ambiguity
+4) Add to p.3, only one explicit log-line finalizer Send(), no ambiguity
 
 5) No need for high-perf Disable/IfDisabled functionality; if the logger is disabled, or the level must not be logged, or the filter decided it shouldn't be logged, then the data will not be generated at all.
 
